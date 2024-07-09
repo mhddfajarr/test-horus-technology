@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    @livewireStyles
     <title>{{ $title }}</title>
+    
 </head>
 <body>
     @include('component.navbar')
     @yield('content') 
+    @livewireScripts
 </body>
 </html>

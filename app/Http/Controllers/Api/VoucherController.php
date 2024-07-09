@@ -12,13 +12,37 @@ class VoucherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function all()
     {
         $data = Voucher::All();
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil mendapatkan data voucher',
+            'message' => 'Berhasil mendapatkan data Voucher',
             'data' => $data
+        ], 200);
+    }
+
+    //mendapatkan voucher yang active saja
+    public function index(Request $request)
+    {
+        // Ambil input kategori dari request
+        $category = $request->input('kategori');
+
+        // Validasi kategori
+        if ($category && !in_array($category, ['food', 'hotel'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Kategori tidak valid'
+            ], 400); // 400 Bad Request jika kategori tidak valid
+        }
+
+        // Query data vouchers berdasarkan kategori jika kategori diberikan
+        $vouchers = $category ? Voucher::where('kategori', $category)->where('status', 1)->get() : Voucher::where('status', 1)->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil mendapatkan data voucher',
+            'data' => $vouchers
         ], 200);
     }
 
