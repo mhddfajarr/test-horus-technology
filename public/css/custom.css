@@ -1,0 +1,58 @@
+/* CSS untuk container penuh layar */
+.full-screen-container {
+    display: flex;
+    padding: 0px 15px;
+    background-color: #ffffff;
+}
+.sidebar-card {
+    width: 250px; /* Lebar sidebar */
+    padding: 20px;
+    height: 100vh;
+    border-radius: 10px;
+    margin: 20px 10px 0px 20px;
+    background-color: #ffffff; /* Warna background sidebar */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Efek shadow */
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.img-card {
+    border-radius: 10px;
+    max-height: 180px; /* Tinggi maksimum gambar */
+    object-fit: cover;
+    overflow: hidden; /* Memotong gambar yang melebihi max-height */
+}
+
+.container-history {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    padding: 25px 15px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.logo {
+    max-width: 120px;
+}

@@ -1,0 +1,19 @@
+/* CSS untuk container penuh layar */
+.full-screen-container {
+    display: flex;
+    background-color: #ffffff;
+    height: 100vh; /* Mengisi tinggi penuh viewport */
+}
+.sidebar-card {
+    width: 250px; /* Lebar sidebar */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0px 0px 20px;
+    background-color: #d9d9d9; /* Warna background sidebar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+}
