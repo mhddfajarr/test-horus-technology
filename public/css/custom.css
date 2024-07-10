@@ -41,7 +41,8 @@
 
 .container-history {
     border-radius: 10px;
-    background-color: #f2f2f2;
+    background-color: #ffffff; /* Warna background sidebar */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Efek shadow */
     padding: 25px 15px;
 }
 
@@ -58,14 +59,33 @@
 }
 
 .link-kategori {
-    width: 100%;
+    width: 65%;
     border-radius: 10px;
     margin: 10px 0px;
     border-color: none;
-    /* background-color: rgba(33, 37, 41, 0.8); */
-    color: #000000; /* Warna teks saat tombol aktif */
+    color: #000000;
+    background-color: #f8f9fa;
 }
 
-.link-kateogri.active:hover {
-    background-color: #000000;
+.count-span {
+    text-align: center;
+    width: 30%;
+    padding: 0px;
+    font-size: 16px;
+    margin: 0px 0px 0px 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+    /* background-color: #212529; */
+}
+
+.link-kategori:hover {
+    color: white;
+    background-color: #212529;
+}
+
+.image-history {
+    max-width: 100px;
+    margin: 5px 20px 5px 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek shadow */
+    border-radius: 5px;
 }

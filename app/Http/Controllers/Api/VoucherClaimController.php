@@ -118,6 +118,23 @@ class VoucherClaimController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $voucherClaim = VoucherClaim::find($id);
+
+        if ($voucherClaim) {
+            
+            $voucher = Voucher::where('id', $voucherClaim->id_voucher)->first();
+            $voucher->status = 1; 
+            $voucher->save();
+            $delete = $voucherClaim->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'voucher claim berhasil dihapus',
+            ], 200);
+        } 
+
+        return response()->json([
+            'status'=>false,
+            'message'=> 'Data Tidak ditemukan'
+        ],404);
     }
 }

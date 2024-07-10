@@ -25,17 +25,25 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        
         // Validasi input
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'login' => ['required'],
             'password' => ['required'],
         ]);
 
+        $user = User::where('email', $request->login)
+                ->orWhere('username', $request->login)
+                ->first();
 
-        $user = User::where('email', $request->email)->first();
         if (!$user) {
             return back()->with('error', 'Email belum terdaftar, silahkan registrasi');
         }
+
+        $credentials = [
+            (filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username') => $request->login,
+            'password' => $request->password,
+        ];
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -43,7 +51,7 @@ class AuthController extends Controller
             return redirect()->intended('/home')->with('success', 'Login berhasil!');
         }
 
-        return back()->with('error', 'Email atau Password salah!');
+        return back()->with('error', 'Password salah!');
     }
 
     public function logout(Request $request)
@@ -75,8 +83,8 @@ class AuthController extends Controller
         if ($response->successful()) {
             return redirect('/login')->with('success', 'Akun berhasil ditambahkan, Silahkan login!');
         } else {
-            $errors = $response->json()['error'] ?? [];
-            return redirect()->back()->with('error', $errors['message'] ?? 'Gagal menambahkan akun. Silakan coba lagi.')->withErrors($errors)->withInput();
+            $errors = $response->json()['data']['email'] ?? $response->json()['data']['username'];
+            return redirect()->back()->with('error', $errors[0])->withErrors($errors)->withInput();
         }
         
     }

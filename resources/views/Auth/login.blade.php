@@ -28,14 +28,14 @@
                 <form action="/login" method="POST" class="w-100">
                     @csrf
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <label for="login" class="form-label">Email or Username</label>
+                        <input type="text" class="form-control" id="login" name="login" required>
                     </div>
                     <div class="mb-5">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                    <button type="submit" class="btn btn-primary w-100">Log in</button>
                 </form>
                 <div class="mt-3 text-center">
                     <p class="mb-0">Belum mempunyai akun? <a href="/registrasi" class="text-decoration-none">Registrasi</a></p>
