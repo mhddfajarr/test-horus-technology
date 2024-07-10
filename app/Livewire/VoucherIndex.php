@@ -9,18 +9,53 @@ class VoucherIndex extends Component
 {
     public $selectedCategory = null;
     public $data = [];
+    public $totalCount = [
+        'total' => 0,
+        'food' => 0,
+        'hotel' => 0,
+    ];
 
     public function mount()
     {
         // Load data awal ketika komponen pertama kali di-render
         $this->fetchVouchers();
+        $this->totalCount = $this->countTotalVouchers();
     }
     public function render()
     {
         return view('livewire.voucher-index', [
             'title' => "Voucher",
-            'data' => $this->data
+            'data' => $this->data,
+            'totalCount' => $this->totalCount,
         ]);
+    }
+
+    private function countTotalVouchers()
+    {   
+        $getData = Http::get('http://test-horus.test:8080/api/vouchers');
+        
+        if ($getData->successful()) {
+            $data = $getData->json(); 
+        } 
+
+        $allVoucher = count($data['data']);
+        $voucherFood = 0;
+        $voucherHotel = 0;
+
+        foreach ($data['data'] as $voucher) {
+            if ($voucher['kategori'] == 'food') {
+                $voucherFood++;
+            }
+            if ($voucher['kategori'] == 'hotel') {
+                $voucherHotel++;
+            }
+        }
+
+        return [
+            'total' => $allVoucher,
+            'food' => $voucherFood,
+            'hotel' => $voucherHotel,
+        ];
     }
 
     public function fetchVouchers()
@@ -35,16 +70,16 @@ class VoucherIndex extends Component
         $response = Http::get($url);
 
         if ($response->successful()) {
-            $this->data = $response->json(); 
+            $this->data = $response->json();
         } else {
-            $this->data = []; // Jika request gagal, set data menjadi array kosong
+            $this->data = []; 
         }
     }
 
     public function selectCategory($category)
     {
         $this->selectedCategory = $category;
-        $this->fetchVouchers(); // Panggil method untuk memuat ulang data berdasarkan kategori baru
+        $this->fetchVouchers(); 
     }
 
 
@@ -52,6 +87,7 @@ class VoucherIndex extends Component
         $response = Http::post('http://test-horus.test:8080/api/vouchersClaim?id_voucher=' . $id);
         if ($response->successful()) {
             $this->fetchVouchers();
+            $this->totalCount = $this->countTotalVouchers();
         }
     }
     
