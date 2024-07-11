@@ -37,7 +37,7 @@ class AuthController extends Controller
                 ->first();
 
         if (!$user) {
-            return back()->with('error', 'Email belum terdaftar, silahkan registrasi');
+            return back()->with('error', 'Email/Username belum terdaftar, silahkan registrasi');
         }
 
         $credentials = [

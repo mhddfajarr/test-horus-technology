@@ -33,8 +33,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h5 class="card-title" style="text-align: left;">{{ $voucher['nama'] }}</h5>
-                                <p class="card-text" style="text-align: left;">{{ $voucher['kategori'] }} </p>
-                            </div>
+                                <p class="card-text" style="text-align: left;">Kategori : {{ $voucher['kategori'] }} </p>
+                            </div> 
                             <div class="col-md-6">
                                 <button class="btn btn-success float-end" wire:click="claim({{ $voucher['id'] }})">Claim</button>
                             </div>
