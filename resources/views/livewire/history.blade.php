@@ -20,7 +20,10 @@
                                 <th scope="row">
                                     <div style="display: flex; align-items: center;">
                                         <img class="image-history" src="{{ $item['voucher']['foto'] }}" alt="">
-                                        <p class="fs-6 mt-3">{{ $item['voucher']['nama'] }}</p>
+                                        <div style="display: flex; flex-direction: column; margin-left: 10px;">
+                                            <p class="fs-6 pt-3 mb-0">{{ $item['voucher']['nama'] }}</p>
+                                            <p style="font-weight: normal; margin-top: 0; padding-top:0px">Kategori : {{ $item['voucher']['kategori'] }}</p>
+                                        </div>
                                     </div>
                                 </th>
                                 <td class="text-center align-middle">
@@ -36,14 +39,26 @@
     </main>    
 
     <div class="sidebar-card">
-        <h2>Kategori</h2>
+        <h2 class="text-center">Kategori</h2>
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <li class="nav-item mt-3 d-flex align-items-center">
+                <button class="link-kategori" wire:click="selectCategory(null)">All</button>
+                <span class="count-span">2</span>
+            </li>
+            <li class="nav-item mt-3 d-flex align-items-center">
+                <button class="link-kategori " wire:click="selectCategory('food')">Food</button>
+                <span class="count-span">2</span>
+            </li>
+            <li class="nav-item mt-3 d-flex align-items-center">
+                <button class="link-kategori" wire:click="selectCategory('hotel')">Hotel</button>
+                <span class="count-span">2</span>
             </li>
         </ul>
-        <div class="button-container">
-            <button class="btn btn-primary">Button 1</button>
+        <div class="button-container mt-3">
+            <form action="/logout" method="POST">
+                @csrf
+                <button class="btn btn-primary" style="width: 100%;" type="submit">Logout</button>
+            </form>
         </div>
     </div>
 

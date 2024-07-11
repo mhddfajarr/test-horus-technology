@@ -36,7 +36,14 @@ class History extends Component
 
     public function fetchVouchers()
     {
-        $response = Http::get('http://test-horus.test:8080/api/vouchersClaim');
+        $url = 'http://test-horus.test:8080/api/vouchersClaim';
+
+        
+        if ($this->selectedCategory) {
+            $url .= '?kategori=' . $this->selectedCategory;
+        }
+        
+        $response = Http::get($url);
 
         if ($response->successful()) {
             $voucherClaims = $response->json();
@@ -62,5 +69,10 @@ class History extends Component
     {
         return view('livewire.history', ['data' => $this->data]);
     }
-}
 
+    public function selectCategory($category)
+    {
+        $this->selectedCategory = $category;
+        $this->fetchVouchers(); 
+    }
+}

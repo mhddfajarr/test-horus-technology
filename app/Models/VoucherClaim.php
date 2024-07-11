@@ -12,7 +12,7 @@ class VoucherClaim extends Model
     protected $guarded = ['id'];
 
     public function Voucher(){
-        return $this->belongsTo(Voucher::class);
+        return $this->belongsTo(Voucher::class, 'id_voucher', 'id');
     }
 
 }
