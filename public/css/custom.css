@@ -89,3 +89,32 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek shadow */
     border-radius: 5px;
 }
+
+@media only screen and (max-width: 576px) {
+    .sidebar-card {
+        display: none;
+    }
+    .content {
+        width: 100%;
+    }
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    .logo {
+        display: none;
+    }
+    .title {
+        display: none;
+    }
+    .button-container {
+        width: 100%;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

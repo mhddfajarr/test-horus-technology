@@ -11,42 +11,49 @@ use Illuminate\Support\Facades\Validator;
 
 class VoucherClaimController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {   
-        $category = $request->input('kategori');
-
-        if ($category && !in_array($category, ['food', 'hotel'])) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Kategori tidak valid'
-            ], 400); // 400 Bad Request jika kategori tidak valid
-        }
-
-        $query = VoucherClaim::query();
-
-        if ($category) {
-            $query->whereHas('voucher', function($query) use ($category) {
-                $query->where('kategori', $category);
-            });
-        }
-
-        $data = $query->get();
-        if ($data->isNotEmpty()) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Berhasil mendapatkan data voucher claim',
-                'data' => $data
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => true,
-                'message' => 'Tidak ada data',
-            ], 200);
-        }
+    public function index()
+    {
+        $data = VoucherClaim::All();
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil mendapatkan data voucher claim',
+            'data' => $data
+        ], 200);
     }
+
+    // public function index(Request $request)
+    // {   
+    //     $category = $request->input('kategori');
+
+    //     if ($category && !in_array($category, ['food', 'hotel'])) {
+    //         return response()->json([
+    //             'status' => false,
+    //             'message' => 'Kategori tidak valid'
+    //         ], 400); // 400 Bad Request jika kategori tidak valid
+    //     }
+
+    //     $query = VoucherClaim::query();
+
+    //     if ($category) {
+    //         $query->whereHas('voucher', function($query) use ($category) {
+    //             $query->where('kategori', $category);
+    //         });
+    //     }
+
+    //     $data = $query->get();
+    //     if ($data->isNotEmpty()) {
+    //         return response()->json([
+    //             'status' => true,
+    //             'message' => 'Berhasil mendapatkan data voucher claim',
+    //             'data' => $data
+    //         ], 200);
+    //     } else {
+    //         return response()->json([
+    //             'status' => true,
+    //             'message' => 'Tidak ada data',
+    //         ], 200);
+    //     }
+    // }
 
     /**
      * Store a newly created resource in storage.

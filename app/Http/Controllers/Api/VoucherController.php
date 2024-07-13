@@ -67,6 +67,12 @@ class VoucherController extends Controller
                 'data' => $validator->errors()
             ],422);
         }
+        if ($request->kategori != 'food' && $request->kategori != 'hotel') {
+            return response()->json([
+                'status' => false,
+                'message' => 'kategori tidak ada',
+            ], 422);
+        }
         $voucher->nama = $request->nama;
         $voucher->foto = $request->foto;
         $voucher->kategori = $request->kategori;
@@ -126,6 +132,12 @@ class VoucherController extends Controller
                 'message' => 'Gagal update data voucher',
                 'data' => $validator->errors()
             ],422);
+        }
+        if ($request->kategori != 'food' && $request->kategori != 'hotel') {
+            return response()->json([
+                'status' => false,
+                'message' => 'kategori tidak ada',
+            ], 422);
         }
         $voucher->nama = $request->nama;
         $voucher->foto = $request->foto;

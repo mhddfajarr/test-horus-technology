@@ -43,15 +43,15 @@
         <ul class="nav flex-column">
             <li class="nav-item mt-3 d-flex align-items-center">
                 <button class="link-kategori" wire:click="selectCategory(null)">All</button>
-                <span class="count-span">2</span>
+                <span class="count-span">{{ $totalCount['total'] }}</span>
             </li>
             <li class="nav-item mt-3 d-flex align-items-center">
                 <button class="link-kategori " wire:click="selectCategory('food')">Food</button>
-                <span class="count-span">2</span>
+                <span class="count-span">{{ $totalCount['food'] }}</span>
             </li>
             <li class="nav-item mt-3 d-flex align-items-center">
                 <button class="link-kategori" wire:click="selectCategory('hotel')">Hotel</button>
-                <span class="count-span">2</span>
+                <span class="count-span">{{ $totalCount['hotel'] }}</span>
             </li>
         </ul>
         <div class="button-container mt-3">
